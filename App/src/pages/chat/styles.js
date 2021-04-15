@@ -1,11 +1,11 @@
 import {StyleSheet , Dimensions} from 'react-native'
 
-const {height} = Dimensions.get('window')
+const {height , width} = Dimensions.get('window')
 const styles = StyleSheet.create({
 
     container:{
         flex:1,
-
+        display:'flex'
     },
     containerSub:{
         alignSelf:'center',
@@ -22,7 +22,21 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     containerChat:{
-        flex:1,
+
+        alignSelf:'center',
+       
+        borderRadius: width * 0.008,
+        marginVertical: height * 0.03,
+        width: '90%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
 
     }
 
