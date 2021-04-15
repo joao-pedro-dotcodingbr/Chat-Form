@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     container:{
 
         backgroundColor:colors.light_green,
+        color:'#fff',
+        
         textAlign:'center',
         alignSelf:'center',
         width:'85%',

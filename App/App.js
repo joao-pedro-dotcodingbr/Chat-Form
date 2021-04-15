@@ -1,5 +1,5 @@
-import React from 'react'
-import Index from './src/index'
+import React from 'react';
+import Index from './src/index';
 
 export default function App() {
   return (

@@ -4,10 +4,12 @@ import {stylesFonts , colors} from '../../styles'
 import styles from './styles';
 
 const message = (props) => {
+
+
   return (
 
-    <View style={styles.container}>
-        <Text style={[stylesFonts.text , {color:colors.color_text}]}>{props.text}</Text>
+    <View style={[styles.container]}>
+        <Text style={[stylesFonts.text , {color:colors.color_text}]}>{props.message}</Text>
     </View>
   );
 }
