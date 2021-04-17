@@ -1,4 +1,6 @@
-# Formulário dinámico
+# Formulário dinâmico
+
+### ❗️❗️❗️ Aviso: Ocorreu um erro no meu emulador, então decidi fazer o projeto na opção browser do expo, infelizmente pode conter alguns erros quando for emulado em mobile.
 
 ### Expo(React Native)
 criando um formulário usando o Formik e Yup, enviando estes dados por api(https://mockapi.io/).
@@ -6,7 +8,7 @@ criando um formulário usando o Formik e Yup, enviando estes dados por api(https
 ### HTTPS Requestions
 
 
-## Criando um novo cadastro
+## Criando um novo cadastro 📄
 
 <p align="center">
   <img src="https://github.com/joaopedro29/Chat-Form/blob/main/assets/CreateUser.gif" />
@@ -15,9 +17,9 @@ criando um formulário usando o Formik e Yup, enviando estes dados por api(https
 
 ## Detalhes
 
-|name| http|requestion
+|nome| http|requestion
 |-------|----------|----------|
-|user|https://6076e87e1ed0ae0017d6a0b3.mockapi.io/api/users|POST|
+|users|https://6076e87e1ed0ae0017d6a0b3.mockapi.io/api/users|POST|
 |form|https://6076e87e1ed0ae0017d6a0b3.mockapi.io/api/form|GET|
 
 ### App teste web:(em breve)
