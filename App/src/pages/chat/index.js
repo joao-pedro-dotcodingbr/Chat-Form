@@ -1,70 +1,20 @@
-import React, { useState , useRef , useEffect} from 'react';
+import React, { useState } from 'react';
 import { View , Animated} from 'react-native';
 import {ScrollView } from 'react-native-gesture-handler';
-import ComponentAssement from '../../component/assement/index';
+import ComponentAssement from '../../components/assement/index';
 import api from '../../services/api'
 import styles from './styles';
-import ComponentInput from '../../component/stage/index';
-
+import ComponentInput from '../../components/stage/index';
+import dataJson from '../../services/stages.json'
 import FormSchema from '../../services/schema';
 import { Formik } from 'formik';
-import ComponentButton from '../../component/button/index';
-import Loading from 'expo-app-loading';
+import ComponentButton from '../../components/button/index';
 
 const chat = () =>{
 
-    const [dataMessage , setDataMessage] = useState([]);
+    const dataMessage = dataJson;
+    // Etapas do formulário
     const [ stage , setStage ] = useState(0)
-    const [loading , setLoading] = useState(false);
-
-const fadeAnimation = useRef(new Animated.Value(0)).current
-
-const ShowNotification = (errors) =>{
-
-    if(errors){
-
-        Animated.sequence([
-            Animated.timing(fadeAnimation, {
-                toValue: 1,
-                duration: 500,
-                useNativeDriver: true,
-            }),
-            Animated.delay(3000),
-            Animated.timing(fadeAnimation, {
-                toValue: 0,
-                duration:500,
-                useNativeDriver: true,
-            })
-        ]).start()  
-
-    }
-      
-}
-
-/*
-    useEffect(()=>{
-
-        api.get('/form').then((response) => {
-
-            setDataMessage(response.data);
-
-            setLoading(false);
-
-        }).catch((error =>{
-            alert(error)
-        }))
-
-
-    },[])
-
-    text = dataMessage[0].message,
-    dataMessage[1].message.replace('@', values.name)
-
-    */
-
-    if(loading){
-        return <Loading/>
-    }
 
     return(
 
@@ -72,25 +22,30 @@ const ShowNotification = (errors) =>{
             
             <View style={styles.containerSub}>
 
-                <Animated.View style={[ {width:100, height:100 , backgroundColor:'#000'}, {opacity: fadeAnimation}]}>
-
-                </Animated.View>
+               
 
             </View>
 
             <ScrollView >
 
-                <Formik initialValues={{name:'' , localization:'' , birth:Date , email:'', assement:0 }} 
+                <Formik initialValues={{name:'' , localization:'' , birth:'' , email:'', assessment:0 }} 
                 onSubmit={( result , actions) =>{
 
-                    alert(JSON.stringify(result))
+                      api.post('/users',{
 
-                    setTimeout(() => {
-                        actions.setSubmitting(false); 
-                      }, 3000);
+                        ...result
+                        
+                      }).then(() =>{
+
+                        alert('Cadastro finalizado')
+
+                      }).catch(error =>{
+                          alert('Ocorreu algum erro no cadastro, tente novamente')
+                          console.log(error)
+                      })
+                      actions.setSubmitting(false); 
                       
-                    console.log('teste')
-
+                      
                 }} validationSchema={FormSchema}>   
 
                     {(propsFormik)=>(
@@ -102,7 +57,7 @@ const ShowNotification = (errors) =>{
                             id={0}
                             propsFormik={propsFormik}
                             keyFormik='name'
-                            message={'teste'}
+                            message={dataMessage[0].message}
                             valueStage={stage}
                             SetStage={setStage}
 
@@ -116,7 +71,7 @@ const ShowNotification = (errors) =>{
                             id={1}
                             propsFormik={propsFormik}
                             keyFormik='localization'
-                            message={'teste'}
+                            message={dataMessage[1].message.replace("@", propsFormik.values.name)}
                             valueStage={stage}
                             SetStage={setStage}
 
@@ -130,7 +85,7 @@ const ShowNotification = (errors) =>{
                             id={2}
                             propsFormik={propsFormik}
                             keyFormik='birth'
-                            message={'teste'}
+                            message={dataMessage[2].message}
                             valueStage={stage}
                             SetStage={setStage}
 
@@ -144,7 +99,7 @@ const ShowNotification = (errors) =>{
                             id={3}
                             propsFormik={propsFormik}
                             keyFormik='email'
-                            message={'teste'}
+                            message={dataMessage[3].message}
                             valueStage={stage}
                             SetStage={setStage}
 
@@ -155,7 +110,7 @@ const ShowNotification = (errors) =>{
 
                             <ComponentAssement 
           
-                             message={'testes'}
+                             message={dataMessage[4].message}
                              id={4}
                              propsFormik={propsFormik}
                              valueStage={stage}

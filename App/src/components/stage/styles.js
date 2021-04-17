@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
         display:'flex', 
         width:'100%',
         flexDirection:'row' , 
+        alignItems:'center',
         height:height * 0.06,
         marginVertical:height * 0.013,
         marginHorizontal: width * 0.07,
@@ -41,7 +42,8 @@ export const styles = StyleSheet.create({
 
         borderRadius: width * 0.004,
         marginLeft: width * 0.02,
-        padding:width * 0.025,
+        width:width * 0.08,
+        height: '100%',
         display:'flex',
         alignItems:'center',
         justifyContent:'center',

@@ -22,7 +22,7 @@ const assement = ({id , valueStage , SetStage , propsFormik , message}) => {
 
     if( id < valueStage || id === valueStage ){
 
-    propsFormik.values.assement = value;
+    propsFormik.values.assessment = value;
 
        SetStage(valueStage +1);
 
