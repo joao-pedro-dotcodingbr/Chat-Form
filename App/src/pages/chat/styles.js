@@ -38,6 +38,15 @@ const styles = StyleSheet.create({
 
         elevation: 5,
 
+    },
+
+    containerStage:{
+
+        width:'100%',
+        display:'flex', 
+        justifyContent:'space-between' , 
+        padding:height * 0.025
+        
     }
 
 })

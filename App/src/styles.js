@@ -6,6 +6,7 @@ export const {height , width} = Dimensions.get('window');
 export const colors = {
     light_green:'#1dd1a1',
     dark_green:'#1dd1a1',
+    red:'#ff7979',
     color_text:'#424242',
 }
 

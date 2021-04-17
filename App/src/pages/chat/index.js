@@ -1,29 +1,47 @@
 import React, { useState , useRef , useEffect} from 'react';
-import { View } from 'react-native';
+import { View , Animated} from 'react-native';
 import {ScrollView } from 'react-native-gesture-handler';
 import ComponentAssement from '../../component/assement/index';
-import api from '../../service/api'
+import api from '../../services/api'
 import styles from './styles';
 import ComponentInput from '../../component/stage/index';
-import {ErrorMessage , Formik , Form , Field } from 'formik';
-import ComponentButton from '../../component/button/index';
-import Loading from 'expo-app-loading'
 
+import FormSchema from '../../services/schema';
+import { Formik } from 'formik';
+import ComponentButton from '../../component/button/index';
+import Loading from 'expo-app-loading';
 
 const chat = () =>{
 
     const [dataMessage , setDataMessage] = useState([]);
-
-    const nameRef = useRef(null);
-    const localizationRef = useRef(null)
-    const emailRef = useRef(null)
-    const assementRef = useRef(null)
-    const birthRef = useRef(null)
-
     const [ stage , setStage ] = useState(0)
+    const [loading , setLoading] = useState(false);
 
-    const [loading , setLoading] = useState(true);
+const fadeAnimation = useRef(new Animated.Value(0)).current
 
+const ShowNotification = (errors) =>{
+
+    if(errors){
+
+        Animated.sequence([
+            Animated.timing(fadeAnimation, {
+                toValue: 1,
+                duration: 500,
+                useNativeDriver: true,
+            }),
+            Animated.delay(3000),
+            Animated.timing(fadeAnimation, {
+                toValue: 0,
+                duration:500,
+                useNativeDriver: true,
+            })
+        ]).start()  
+
+    }
+      
+}
+
+/*
     useEffect(()=>{
 
         api.get('/form').then((response) => {
@@ -39,6 +57,11 @@ const chat = () =>{
 
     },[])
 
+    text = dataMessage[0].message,
+    dataMessage[1].message.replace('@', values.name)
+
+    */
+
     if(loading){
         return <Loading/>
     }
@@ -49,74 +72,103 @@ const chat = () =>{
             
             <View style={styles.containerSub}>
 
+                <Animated.View style={[ {width:100, height:100 , backgroundColor:'#000'}, {opacity: fadeAnimation}]}>
+
+                </Animated.View>
+
             </View>
 
             <ScrollView >
 
-                <Formik initialValues={{name:'' , localization:'' , birth:Date , email:''}}>
+                <Formik initialValues={{name:'' , localization:'' , birth:Date , email:'', assement:0 }} 
+                onSubmit={( result , actions) =>{
 
-                    {({values , handleChange , handleSubmit})=>(
+                    alert(JSON.stringify(result))
 
+                    setTimeout(() => {
+                        actions.setSubmitting(false); 
+                      }, 3000);
+                      
+                    console.log('teste')
+
+                }} validationSchema={FormSchema}>   
+
+                    {(propsFormik)=>(
+ 
                         <View style={styles.containerChat}>
 
-                            <ComponentInput 
-                            message={dataMessage[0].message}
+                            <ComponentInput
+
                             id={0}
+                            propsFormik={propsFormik}
+                            keyFormik='name'
+                            message={'teste'}
                             valueStage={stage}
                             SetStage={setStage}
 
-                            placeholder={'seu nome'}
-                            values={values.name} 
-                            Ref={nameRef} 
-                            handleChange={handleChange('name')}/>
-                            
-                            <ComponentInput 
+                            autoFocus
+                            placeholder="Digite seu nome"
+                         
+                            />
 
-                            message={dataMessage[1].message.replace('@', values.name)}
+                            <ComponentInput
+
                             id={1}
+                            propsFormik={propsFormik}
+                            keyFormik='localization'
+                            message={'teste'}
                             valueStage={stage}
                             SetStage={setStage}
-                            placeholder={'cidade e estado'}
-                            values={values.localization} 
-                            Ref={localizationRef} 
-                            handleChange={handleChange('localization')}/>
 
-                            <ComponentInput 
+                            autoFocus
+                            placeholder="Digite a cidade e estado"
 
-                            message={dataMessage[2].message}
+                            />
+
+                            <ComponentInput
+
                             id={2}
+                            propsFormik={propsFormik}
+                            keyFormik='birth'
+                            message={'teste'}
                             valueStage={stage}
                             SetStage={setStage}
-                            placeholder={'00/00/0000'}
-                            values={values.birth} 
-                            Ref={birthRef} 
-                            handleChange={handleChange('birth')}/>
 
-                            <ComponentInput 
+                            autoFocus
+                            placeholder="00/00/0000"
 
-                            message={dataMessage[3].message}
+                            />
+
+                            <ComponentInput
+
                             id={3}
+                            propsFormik={propsFormik}
+                            keyFormik='email'
+                            message={'teste'}
                             valueStage={stage}
                             SetStage={setStage}
-                            placeholder={'digite seu email'}
-                            values={values.email} 
-                            Ref={emailRef} 
-                            handleChange={handleChange('email')}/>
 
+                            autoFocus
+                            placeholder="Digite seu email"
+
+                            />
 
                             <ComponentAssement 
-                            message={dataMessage[4].message}
+          
+                             message={'testes'}
                              id={4}
+                             propsFormik={propsFormik}
                              valueStage={stage}
                              SetStage={setStage}
                             
                             />
 
                             <ComponentButton 
+
+                             propsFormik={propsFormik}
                              text={'finalizar'} 
                              id={5}
                              valueStage={stage}
-                             SetStage={setStage}
 
                             />
                         
