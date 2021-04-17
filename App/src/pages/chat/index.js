@@ -21,7 +21,6 @@ const chat = () =>{
         <View style={styles.container}>
             
             <View style={styles.containerSub}>
-
                
 
             </View>

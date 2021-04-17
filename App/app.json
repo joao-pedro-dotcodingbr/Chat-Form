@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Formulário dinâmico ",
+    "githubUrl": "https://github.com/joaopedro29"
   }
 }
